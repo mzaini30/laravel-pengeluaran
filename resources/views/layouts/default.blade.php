@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>hello world</title>
+	<title>@yield('judul')</title>
 </head>
 <body>
 	@yield('konten')
