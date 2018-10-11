@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('tes');
-});
+Route::get('/', 'IniController@index');
