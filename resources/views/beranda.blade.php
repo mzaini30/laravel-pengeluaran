@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('judul', 'Pengeluaran')
+@section('judul', 'Laporan Pengeluaran')
 
 @section('head')
 	<link rel="stylesheet" type="text/css" href="{{ asset('highcharts/code/css/highcharts.css') }}">
@@ -8,16 +8,13 @@
 
 @section('konten')
 
-	<center>
-		<h1>Laporan Pengeluaran</h1>
-	</center>
-	<hr>
-
 	<div class="row">
-		<div class="theia col-sm-6">
+		<div class="theia col-sm-8">
+			<br>
 			<div id="container"></div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-4">
+			<br>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -38,12 +35,12 @@
 				<p>
 					<a href="http://localhost/phpmyadmin/sql.php?db=pengeluaran&goto=db_structure.php&table=keluar&pos=0" target="_blank" class="btn btn-default">Buka Database</a>
 				</p>
+				{{ $data->links() }}	
+				<hr>
+				<p>&copy; <a href='http://muhammadzaini.com'>Zen</a> & Laravel {{ date('Y') }}</p>
 			</center>
 		</div>
 	</div>
-	<center>
-		{{ $data->links() }}	
-	</center>
 
 @endsection
 
@@ -55,7 +52,7 @@
 		Highcharts.chart('container', {
 
 			chart: {
-				height: 250
+				height: 300
 			},
 
 		    title: {
@@ -129,7 +126,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.theia').theiaStickySidebar({
-				additionalMarginTop: 20
+				// additionalMarginTop: 20
 				// additionalMarginBottom: 20
 			});
 		});

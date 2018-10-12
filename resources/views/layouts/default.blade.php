@@ -11,10 +11,6 @@
 	<div class="container">
 		@yield('konten')
 	</div>
-	<hr>
-	<center>
-		<p>&copy; Zen & Laravel 2018</p>
-	</center>
 	@yield('footer')
 </body>
 </html>
