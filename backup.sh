@@ -1,0 +1,1 @@
+mysqldump --user='root' --password='kucing' pengeluaran > database.sql
