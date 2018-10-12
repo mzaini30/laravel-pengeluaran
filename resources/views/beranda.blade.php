@@ -2,27 +2,131 @@
 
 @section('judul', 'Beranda')
 
+@section('head')
+	<link rel="stylesheet" type="text/css" href="{{ asset('highcharts/code/css/highcharts.css') }}">
+@endsection
+
 @section('konten')
 
-	<h1>Laporan Pengeluaran</h1>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Tanggal</th>
-				<th>Nominal</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach($data as $d)
-				<tr>
-					<td>{{ $d->tanggal }}</td>
-					<td>Rp {{ number_format($d->nominal, 0, ',', '.') }}</td>
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
+	<center>
+		<h1>Laporan Pengeluaran</h1>
+	</center>
+	<hr>
+
+	<div class="row">
+		<div class="theia col-sm-6">
+			<div id="container"></div>
+		</div>
+		<div class="col-sm-6">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Tanggal</th>
+						<th>Nominal</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($data as $d)
+						<tr>
+							<td>{{ Carbon\Carbon::parse($d->tanggal)->format('d/M/Y') }}</td>
+							<td>Rp {{ number_format($d->nominal, 0, ',', '.') }}</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<center>
 		{{ $data->links() }}	
 	</center>
 
+@endsection
+
+@section('footer')
+	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+	<script type="text/javascript" src='{{ asset("highcharts/code/highcharts.js") }}'></script>
+	<script type="text/javascript">
+
+		Highcharts.chart('container', {
+
+			chart: {
+				height: 250
+			},
+
+		    title: {
+		        text: 'Grafik Pengeluaran'
+		    },
+
+		    subtitle: {
+		        text: ''
+		    },
+
+		    xAxis: {
+		        // categories: ['12', '13']
+		        categories: [
+		        	@foreach($data->sortBy('tanggal') as $d)
+		        		'{{ Carbon\Carbon::parse($d->tanggal)->format('d/M/Y') }}',
+		        	@endforeach
+		        ]
+		    },
+
+		    yAxis: {
+		        title: {
+		            text: 'Nominal'
+		        }
+		    },
+
+		    legend: {
+		        layout: 'vertical',
+		        align: 'right',
+		        verticalAlign: 'middle'
+		    },
+
+		    plotOptions: {
+		        series: {
+		            label: {
+		                connectorAllowed: false
+		            }
+		            // pointStart: 1
+		        }
+		    },
+
+		    series: [{
+		        name: 'Pengeluaran',
+		        // data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+		        data: [
+			        @foreach($data->sortBy('tanggal') as $d)
+			        	{{ $d->nominal }},
+			        @endforeach
+		        ]
+		    }],
+
+		    responsive: {
+		        rules: [{
+		            condition: {
+		                maxWidth: 500
+		            },
+		            chartOptions: {
+		                legend: {
+		                    layout: 'horizontal',
+		                    align: 'center',
+		                    verticalAlign: 'bottom'
+		                }
+		            }
+		        }]
+		    }
+
+		});
+
+	</script>
+	<script type="text/javascript" src="{{ asset('ResizeSensor.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('theia-sticky-sidebar.min.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.theia').theiaStickySidebar({
+				additionalMarginTop: 20
+				// additionalMarginBottom: 20
+			});
+		});
+	</script>
 @endsection
