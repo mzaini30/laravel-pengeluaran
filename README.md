@@ -16,6 +16,6 @@ Import database dari `database.sql`.
 
 Jalankan servernya:
 
-```
+```bash
 php artisan serve --port 8823
 ```
