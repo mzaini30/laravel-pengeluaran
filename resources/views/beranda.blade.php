@@ -34,6 +34,11 @@
 					@endforeach
 				</tbody>
 			</table>
+			<center>
+				<p>
+					<a href="http://localhost/phpmyadmin/sql.php?db=pengeluaran&goto=db_structure.php&table=keluar&pos=0" target="_blank" class="btn btn-default">Buka Database</a>
+				</p>
+			</center>
 		</div>
 	</div>
 	<center>
