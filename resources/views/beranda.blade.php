@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('judul', 'Beranda')
+@section('judul', 'Pengeluaran')
 
 @section('head')
 	<link rel="stylesheet" type="text/css" href="{{ asset('highcharts/code/css/highcharts.css') }}">
