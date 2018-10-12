@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class IniController extends Controller
 {
     public function index(){
-    	$data = DB::table('keluar')->orderBy('tanggal', 'desc')->paginate(2);
+    	$data = DB::table('keluar')->orderBy('tanggal', 'desc')->paginate(3);
     	return view('beranda', compact('data'));
     }
 }
